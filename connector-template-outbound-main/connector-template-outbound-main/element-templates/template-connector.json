@@ -1,0 +1,85 @@
+{
+  "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
+  "name": "Get Weather Forecast",
+  "id": "fe486390-2595-424b-a4df-4907244e9220",
+  "version": 1718312954316,
+  "appliesTo": [
+    "bpmn:Task"
+  ],
+  "properties": [
+    {
+      "label": "Latitude",
+      "description": "The latitude for the weather report location.",
+      "type": "String",
+      "value": "=latitude",
+      "feel": "optional",
+      "binding": {
+        "type": "zeebe:input",
+        "name": "latitude"
+      },
+      "constraints": {
+        "notEmpty": true
+      }
+    },
+    {
+      "label": "Longitude",
+      "description": "The longitude for the weather report location.",
+      "type": "String",
+      "value": "=longitude",
+      "feel": "optional",
+      "binding": {
+        "type": "zeebe:input",
+        "name": "longitude"
+      },
+      "constraints": {
+        "notEmpty": true
+      }
+    },
+    {
+       "label": "Units",
+       "description": "The units used in the weather forecast results",
+       "type": "Dropdown",
+       "value": "metric",
+       "binding": {
+         "type": "zeebe:input",
+         "name": "units"
+      },
+    "choices": [
+      { "name": "Imperial", "value": "imperial" },
+      { "name": "Metric", "value": "metric" }
+    ]
+    },
+    {
+      "label": "OpenWeather API Key",
+      "description": "The OpenWeather API Key to use",
+      "type": "String",
+      "value": "secrets.OPENWEATHER_API_KEY",
+      "binding": {
+        "type": "zeebe:input",
+        "name": "apiKey"
+    },
+      "constraints": {
+        "notEmpty": true
+    }
+  },
+  {
+      "label": "Result Variable",
+      "description": "Name of variable to store the response in",
+      "group": "output",
+      "type": "String",
+      "value": "weather",
+      "binding": {
+        "type": "zeebe:taskHeader",
+        "key": "resultVariable"
+      }
+    },
+  {
+   "type": "Hidden",
+   "value": "io.camunda:weather-api:1",
+   "binding": {
+     "type": "zeebe:taskDefinition:type"
+ }
+}
+
+  ]
+}
